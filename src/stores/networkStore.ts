@@ -1,20 +1,30 @@
-import NetInfo, { NetInfoStateType } from "@react-native-community/netinfo";
+import * as Network from "expo-network";
 import { create } from "zustand";
 
 type NetworkStore = {
   isOffline: boolean;
-  connectionType: NetInfoStateType;
+  connectionType: Network.NetworkStateType;
   init: () => () => void;
 };
 
 export const useNetworkStore = create<NetworkStore>(set => ({
   isOffline: false,
-  connectionType: NetInfoStateType.unknown,
-  init: () =>
-    NetInfo.addEventListener(state => {
+  connectionType: Network.NetworkStateType.UNKNOWN,
+  init: () => {
+    Network.getNetworkStateAsync().then(state => {
       set({
         isOffline: !state.isConnected,
-        connectionType: state.type,
+        connectionType: state.type ?? Network.NetworkStateType.UNKNOWN,
       });
-    }),
+    });
+
+    const subscription = Network.addNetworkStateListener(state => {
+      set({
+        isOffline: !state.isConnected,
+        connectionType: state.type ?? Network.NetworkStateType.UNKNOWN,
+      });
+    });
+
+    return () => subscription.remove();
+  },
 }));
