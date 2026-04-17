@@ -102,6 +102,13 @@ Domain-scoped types live in `<domain>/types/`. Only put a type in `src/types/` i
 - `npm run format` / `npm run format:check` — Prettier (with `prettier-plugin-tailwindcss` for class sorting)
 - `npm run start` / `npm run android` / `npm run ios`
 
+## Line endings
+
+**All files must use LF (`\n`).** This is enforced by:
+- `.gitattributes` — git normalises all text files to LF on checkout
+- `.vscode/settings.json` — `"files.eol": "\n"`
+- ESLint — `linebreak-style: unix` + Prettier `endOfLine: lf`
+
 ## What not to do
 
 - No `any`. No `StyleSheet.create` (by default). No `FlatList`. No React Context. No arrow-function components. No raw hardcoded strings in UI. No `useEffect` as the default for async or derived state. No wide Zustand selectors. No editing of [src/components/ui/](src/components/ui/) generated files.
