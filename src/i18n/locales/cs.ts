@@ -1,5 +1,5 @@
 const cs = {
-  app: {
+  dashboard: {
     ready: "Gluestack-UI v3 je připraven. Otevřete App.tsx pro začátek.",
   },
 } as const;
