@@ -1,4 +1,4 @@
-# VrVitalis
+# VR Vitalis
 
 React Native / Expo app targeting **low-end Android 11 and iOS 16 devices** with small RAM and slow CPUs, built for **users aged 60+**. Performance, accessibility, and clarity are non-negotiable.
 

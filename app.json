@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "VrVitalis",
+    "name": "VR Vitalis",
     "slug": "VrVitalis",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -27,8 +27,6 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": [
-      "expo-localization"
-    ]
+    "plugins": ["expo-localization"]
   }
 }
