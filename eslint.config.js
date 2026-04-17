@@ -33,8 +33,10 @@ module.exports = [
           bracketSameLine: true,
           trailingComma: "all",
           arrowParens: "avoid",
+          endOfLine: "lf",
         },
       ],
+      "linebreak-style": ["error", "unix"],
       semi: ["error", "always"],
       quotes: [
         "error",
