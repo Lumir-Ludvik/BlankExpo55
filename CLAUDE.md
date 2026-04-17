@@ -78,6 +78,10 @@ Domain-scoped types live in `<domain>/types/`. Only put a type in `src/types/` i
 ### i18n
 - All user-visible strings go through `i18next` (`t('namespace.key')`). No inline English in JSX.
 - Keys grouped by screen/domain namespace. Plurals and interpolation via i18next, not manual string concat.
+- **Czech (`cs`) is the source of truth.** `src/i18n/locales/cs.ts` is `as const`; the `Translations` type is derived from it. All other locales are typed against `Translations` — missing or extra keys are compile errors.
+- **`Translations` and `DeepString` live in `src/i18n/types.ts`** — import from there. Never cross-import between locale files.
+- **Type augmentation lives in `src/i18n/types.d.ts`** — do not redeclare `CustomTypeOptions` elsewhere.
+- **Language is detected from device locale** via `expo-localization`; fallback is `"cs"`.
 
 ### Accessibility & UX for 60+ users
 - Large default type, high contrast, clear focus states, descriptive labels, confirmations before destructive actions, forgiving tap targets, minimal jargon.
