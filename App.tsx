@@ -8,9 +8,14 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { Dashboard } from "@/screens/Dashboard";
+import { useNetworkStore } from "@/stores/networkStore";
 
 export default function App() {
   const colorScheme = useColorScheme();
+  const init = useNetworkStore(s => s.init);
+
+  // subscribe to network changes for the app lifetime
+  useEffect(() => init(), [init]);
 
   return (
     <GestureHandlerRootView className="flex-1">

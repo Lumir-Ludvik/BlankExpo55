@@ -1,5 +1,8 @@
 {
   "files.eol": "\n",
+  "files.associations": {
+    "global.css": "tailwindcss"
+  },
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {
