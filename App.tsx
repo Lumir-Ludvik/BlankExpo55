@@ -1,10 +1,10 @@
 import "./src/global.css";
 import "./src/i18n";
 
+import { StatusBar } from "expo-status-bar";
 import React from "react";
 import { useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-import { StatusBar } from "expo-status-bar";
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { Dashboard } from "@/screens/Dashboard";

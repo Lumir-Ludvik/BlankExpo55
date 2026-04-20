@@ -2,27 +2,26 @@
 
 import { H4 } from "@expo/html-elements";
 import { createActionsheet } from "@gluestack-ui/core/actionsheet/creator";
-import {
-  Pressable,
-  View,
-  Text,
-  ScrollView,
-  VirtualizedList,
-  FlatList,
-  SectionList,
-  ViewStyle,
-} from "react-native";
 import { PrimitiveIcon, UIIcon } from "@gluestack-ui/core/icon/creator";
-import { tva } from "@gluestack-ui/utils/nativewind-utils";
 import type { VariantProps } from "@gluestack-ui/utils/nativewind-utils";
-import { withStyleContext } from "@gluestack-ui/utils/nativewind-utils";
-import { cssInterop } from "nativewind";
+import { tva, withStyleContext } from "@gluestack-ui/utils/nativewind-utils";
 import {
-  Motion,
   AnimatePresence,
   createMotionAnimatedComponent,
+  Motion,
   MotionComponentProps,
 } from "@legendapp/motion";
+import { cssInterop } from "nativewind";
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  SectionList,
+  Text,
+  View,
+  ViewStyle,
+  VirtualizedList,
+} from "react-native";
 
 import React from "react";
 
@@ -547,16 +546,16 @@ const ActionsheetIcon = React.forwardRef<
 
 export {
   Actionsheet,
+  ActionsheetBackdrop,
   ActionsheetContent,
-  ActionsheetItem,
-  ActionsheetItemText,
   ActionsheetDragIndicator,
   ActionsheetDragIndicatorWrapper,
-  ActionsheetBackdrop,
-  ActionsheetScrollView,
-  ActionsheetVirtualizedList,
   ActionsheetFlatList,
-  ActionsheetSectionList,
-  ActionsheetSectionHeaderText,
   ActionsheetIcon,
+  ActionsheetItem,
+  ActionsheetItemText,
+  ActionsheetScrollView,
+  ActionsheetSectionHeaderText,
+  ActionsheetSectionList,
+  ActionsheetVirtualizedList,
 };
