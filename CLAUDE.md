@@ -106,8 +106,9 @@ Domain-scoped types live in `<domain>/types/`. Only put a type in `src/types/` i
 
 ## Testing
 
-- Jest via `jest-expo`. Tests live in [src/tests/](src/tests/) or colocated `__tests__`.
+- Jest via `jest-expo`. Test files are colocated beside the file they test (`Foo.test.ts` next to `Foo.ts`).
 - Test **core logic** (stores, reducers, type guards, api transformers, hook logic). Do not aim for coverage of trivial presentational components.
+- Structure every test with **AAA comments** (`// Arrange`, `// Act`, `// Assert`). Omit a section's comment only when that section is absent (e.g. no arrange needed).
 
 ## Tooling
 
