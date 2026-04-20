@@ -1,10 +1,10 @@
 /// <reference path="./types.d.ts" />
+import * as Localization from "expo-localization";
 import i18n from "i18next";
 import { initReactI18next } from "react-i18next";
-import * as Localization from "expo-localization";
 
-import en from "./locales/en";
 import cs from "./locales/cs";
+import en from "./locales/en";
 
 function getDeviceLanguage(): string {
   return Localization.getLocales()[0]?.languageCode ?? "cs";

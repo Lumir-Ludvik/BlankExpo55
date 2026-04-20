@@ -1,5 +1,5 @@
 import React from "react";
-import { gridStyle, gridItemStyle } from "./styles";
+import { gridItemStyle, gridStyle } from "./styles";
 
 import type { VariantProps } from "@gluestack-ui/utils/nativewind-utils";
 
