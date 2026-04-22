@@ -27,6 +27,14 @@
       "favicon": "./assets/favicon.png",
       "bundler": "metro"
     },
-    "plugins": ["expo-localization"]
+    "plugins": [
+      "expo-localization",
+      [
+        "expo-local-authentication",
+        {
+          "faceIDPermission": "$(PRODUCT_NAME) používá Face ID pro ověření vaší identity."
+        }
+      ]
+    ]
   }
 }
