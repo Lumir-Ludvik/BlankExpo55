@@ -3,25 +3,48 @@ import "./src/i18n";
 
 import { StatusBar } from "expo-status-bar";
 import React, { useEffect } from "react";
-import { useColorScheme } from "react-native";
+import { AppState, AppStateStatus, useColorScheme } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { GluestackUIProvider } from "@/components/ui/gluestack-ui-provider";
 import { Dashboard } from "@/screens/Dashboard";
+import { LockedScreen } from "@/screens/LockedScreen";
+import { useAuthStore } from "@/stores/authStore";
 import { useNetworkStore } from "@/stores/networkStore";
 
 export default function App() {
   const colorScheme = useColorScheme();
-  const init = useNetworkStore(s => s.init);
+  const initNetwork = useNetworkStore(s => s.init);
+  const isAuthenticated = useAuthStore(s => s.isAuthenticated);
+  const authenticate = useAuthStore(s => s.authenticate);
+  const lock = useAuthStore(s => s.lock);
 
   // subscribe to network changes for the app lifetime
-  useEffect(() => init(), [init]);
+  useEffect(() => initNetwork(), [initNetwork]);
+
+  // lock on background, re-auth on foreground
+  useEffect(() => {
+    authenticate();
+
+    const subscription = AppState.addEventListener(
+      "change",
+      (state: AppStateStatus) => {
+        if (state === "background" || state === "inactive") {
+          lock();
+        } else if (state === "active") {
+          authenticate();
+        }
+      },
+    );
+
+    return () => subscription.remove();
+  }, [authenticate, lock]);
 
   return (
     <GestureHandlerRootView className="flex-1">
       <GluestackUIProvider mode={colorScheme === "dark" ? "dark" : "light"}>
         <StatusBar style="auto" />
-        <Dashboard />
+        {isAuthenticated ? <Dashboard /> : <LockedScreen />}
       </GluestackUIProvider>
     </GestureHandlerRootView>
   );
