@@ -70,6 +70,13 @@ Domain-scoped types live in `<domain>/types/`. Only put a type in `src/types/` i
 - Keep actions in the store (`set`, `get`), not in components. Components read state + call actions.
 - Split hot/cold state into separate stores when a slice grows — rerender cost is per-store.
 
+### Auth & secure storage
+
+- **`react-native-keychain`** for all auth-related secrets: access token, refresh token, last online auth timestamp, biometric key pairs.
+- **`AsyncStorage`** for non-sensitive preferences only (theme, language, cached data structure).
+- **Never `expo-secure-store`** for auth — keychain covers it and avoids mixing two secure storage libraries for the same concern.
+- Biometrics unlock the keychain locally — they never go online. Online auth (JWT + refresh token) is a separate concern layered on top.
+
 ### Data fetching
 
 - Axios instance(s) in [src/api/](src/api/) with interceptors for auth, error normalization, and i18n-aware error messages.
