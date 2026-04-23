@@ -76,6 +76,40 @@ describe("authStore", () => {
     });
   });
 
+  it("does not call authenticateAsync twice when called concurrently", async () => {
+    // Arrange
+    mockAuthenticateAsync.mockResolvedValue({ success: true });
+
+    // Act
+    await Promise.all([getState().authenticate(), getState().authenticate()]);
+
+    // Assert
+    expect(mockAuthenticateAsync).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not call authenticateAsync twice when called in sequence", async () => {
+    // Arrange
+    mockAuthenticateAsync.mockResolvedValue({ success: true });
+
+    // Act
+    await getState().authenticate();
+    await getState().authenticate();
+
+    // Assert
+    expect(mockAuthenticateAsync).toHaveBeenCalledTimes(1);
+  });
+
+  it("does not call authenticateAsync when already authenticated", async () => {
+    // Arrange
+    useAuthStore.setState({ isAuthenticated: true });
+
+    // Act
+    await getState().authenticate();
+
+    // Assert
+    expect(mockAuthenticateAsync).not.toHaveBeenCalled();
+  });
+
   it("locks by setting isAuthenticated to false", () => {
     // Arrange
     useAuthStore.setState({ isAuthenticated: true });
