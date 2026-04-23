@@ -22,17 +22,16 @@ export default function App() {
   // subscribe to network changes for the app lifetime
   useEffect(() => initNetwork(), [initNetwork]);
 
-  // lock on background, re-auth on foreground
   useEffect(() => {
     authenticate();
 
     const subscription = AppState.addEventListener(
       "change",
-      (state: AppStateStatus) => {
-        if (state === "background" || state === "inactive") {
+      async (state: AppStateStatus) => {
+        if (state === "background") {
           lock();
         } else if (state === "active") {
-          authenticate();
+          await authenticate();
         }
       },
     );
