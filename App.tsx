@@ -29,7 +29,7 @@ export default function App() {
     const subscription = AppState.addEventListener(
       "change",
       (state: AppStateStatus) => {
-        if (state === "background" || state === "inactive") {
+        if (state === "background") {
           lock();
         } else if (state === "active") {
           authenticate();
